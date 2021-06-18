@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.dto.PlayerProfile;
 import com.example.model.Player;
 import com.example.repository.PlayerRepository;
 import com.example.service.PlayerService;
@@ -13,33 +14,43 @@ import java.util.Optional;
 public class PlayerServiceImpl implements PlayerService
 {
     @Autowired
-    PlayerRepository playerRepository;
+    private PlayerRepository playerRepository;
 
     @Override
-    public Player add(Player player)
+    public Player addPlayer(Player player)
     {
         return playerRepository.save(player);
     }
 
     @Override
-    public List get()
+    public List<Player> getPlayers()
     {
         return playerRepository.findAll();
     }
 
     @Override
-    public Optional get(int id)
+    public Optional<Player> getPlayer(int id)
     {
         return playerRepository.findById(id);
     }
 
     @Override
-    public void delete(int id)
+    public void deletePlayer(int id)
     {
-        if (get(id).isPresent())
+        if (this.getPlayer(id).isPresent())
         {
-            playerRepository.delete((Player) get(id).get());
+            playerRepository.delete((Player) this.getPlayer(id).get());
         }
+    }
+
+    @Override
+    public PlayerProfile getPlayerProfile(int id)
+    {
+        PlayerProfile playerProfile = new PlayerProfile();
+
+        playerProfile.setEmail(playerRepository.findById(id).get().getEmail());
+
+        return playerProfile;
     }
 }
 
