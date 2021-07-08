@@ -8,14 +8,14 @@ import java.util.Optional;
 
 public interface PlayerService
 {
-    public Player addPlayer(Player player);
+    Player addPlayer(Player player);
 
-    public List<Player> getPlayers();
+    List<Player> getPlayers();
 
-    public void deletePlayer(int id);
+    void deletePlayer(int id);
 
-    public Optional<Player> getPlayer(int id);
+    Optional<Player> getPlayer(int id);
 
-    public PlayerProfile getPlayerProfile(int id);
+    PlayerProfile getPlayerProfile(int id);
 }
 
